@@ -1,16 +1,16 @@
 NIC Software
 ===============
-This repository contains drivers, utilities and development libraries for Silicom ultra-low-latency network cards (fb2CG@KU15P and others). 
+This repository contains drivers, utilities and development libraries for ultra-low-latency network cards (Silicom fb2CG@KU15P and others). 
 
 What's an FPGA-based NIC?
 -----------------
-The NIC range from Silicom feature world-leading latency performance, precision timing, a simple and flexible programming interface, and true hardware extensibility through FPGA based reconfiguration.
+The NICs provide ultra-low latency performance, precision timing, a simple and flexible programming interface, and true hardware extensibility through FPGA based reconfiguration.
 
 Once the drivers are installed, the NICs present as normal network cards under Linux and many of the features are available through standard Linux APIs, however there are also additional tools and libraries that unlock the full performance and feature set.
 
-An **nic-config** utility provides an overview of device configuration and status at a glance.
+A **nic-config** utility provides an overview of device configuration and status at a glance.
 
-An **nic-capture** utility is provided for packet capture.  With appropriate configuration, NICs can provide lossless line rate capture at 10G.  Accurate hardware timestamps are provided for each packet, to 3.2ns resolution for most Silicom NICs.
+A **nic-capture** utility is provided for packet capture.  With appropriate configuration, NICs can provide lossless line rate capture at 10G.  Accurate hardware timestamps are provided for each packet, to 3.2ns resolution for most NICs.
 
 For low latency applications, Linux sockets applications can be accelerated with the **sock** wrapper that hooks sockets calls and sends data directly to the card, bypassing the kernel.  No recompilation is necessary.  Alternatively, developers can access the card directly, including sending and receiving packets, through the **libnic** API.  Sock also provides an extensions API that allows a hybrid model, where sockets are used for the majority of TCP functions but bypassed on the critical path.
 

@@ -1,35 +1,39 @@
-NIC Software
+ExaNIC Software
 ===============
-This repository contains drivers, utilities and development libraries for ultra-low-latency network cards (Silicom fb2CG@KU15P and others). 
+This repository contains drivers, utilities and development libraries for Exablaze ultra-low-latency network cards (ExaNIC X25, ExaNIC X100, ExaNIC X10, ExaNIC X40, ExaNIC X2, ExaNIC X4, ExaNIC V5P, ExaNIC V9P, ExaNIC GM, and ExaNIC HPT). For full installation instructions and user guide please refer to the [ExaNIC User Guide](https://www.cisco.com/c/en/us/td/docs/dcn/nexus3550/smartnic/sw/user-guide/cisco-nexus-smartnic-user-guide/index.html).
 
-What's an FPGA-based NIC?
+More generally this code is extended to hand FPGA cards with the AMD/Xilinx KU3P, KU115, VU5P and VU9P FPGAs.
+
+What's an ExaNIC?
 -----------------
-The NICs provide ultra-low latency performance, precision timing, a simple and flexible programming interface, and true hardware extensibility through FPGA based reconfiguration.
+The ExaNIC range from Exablaze (now part of Cisco) features world-leading latency performance, precision timing, a simple and flexible programming interface, and true hardware extensibility through FPGA based reconfiguration.
 
-Once the drivers are installed, the NICs present as normal network cards under Linux and many of the features are available through standard Linux APIs, however there are also additional tools and libraries that unlock the full performance and feature set.
+Once the drivers are installed, ExaNICs present as normal network cards under Linux and many of the features are available through standard Linux APIs, however there are also additional tools and libraries that unlock the full performance and feature set.
 
-A **nic-config** utility provides an overview of device configuration and status at a glance.
+An **exanic-config** utility provides an overview of device configuration and status at a glance.
 
-A **nic-capture** utility is provided for packet capture.  With appropriate configuration, NICs can provide lossless line rate capture at 10G.  Accurate hardware timestamps are provided for each packet, to 3.2ns resolution for most NICs.
+An **exanic-capture** utility is provided for packet capture.  With appropriate configuration, ExaNICs can provide lossless line rate capture at 10G.  Accurate hardware timestamps are provided for each packet, to 6.2ns resolution for most ExaNICs and to 0.25ns resolution on the ExaNIC HPT (High Precision Timing) variant.
 
-For low latency applications, Linux sockets applications can be accelerated with the **sock** wrapper that hooks sockets calls and sends data directly to the card, bypassing the kernel.  No recompilation is necessary.  Alternatively, developers can access the card directly, including sending and receiving packets, through the **libnic** API.  Sock also provides an extensions API that allows a hybrid model, where sockets are used for the majority of TCP functions but bypassed on the critical path.
+For low latency applications, Linux sockets applications can be accelerated with the **exasock** wrapper that hooks sockets calls and sends data directly to the card, bypassing the kernel.  No recompilation is necessary.  Alternatively, developers can access the card directly, including sending and receiving packets, through the **libexanic** API.  Exasock also provides an extensions API that allows a hybrid model, where sockets are used for the majority of TCP functions but bypassed on the critical path.
 
 Hardware traffic filtering and steering features are available to reduce host application load.
 
-Advanced users with specific network processing needs can also program the onboard FPGA to develop custom network functions in hardware.
+Advanced users with specific network processing needs can also program the onboard FPGA to develop custom network functions in hardware.  (The Firmware Development Kit is licensed separately.)
 
 Repository Contents
 -------------------
-- **modules** - NIC and sock drivers for Linux
-- **libs** - libnic and sock libraries
-- **util** - NIC utilities including nic-config, nic-capture, nic-clock-sync and nic-fwupdate
-- **scripts** - sock wrapper script
-- **perf_test** - tools for performing performance tests with NICs as well as with devices from other vendors
+- **modules** - ExaNIC and exasock drivers for Linux
+- **libs** - libexanic and exasock libraries
+- **util** - ExaNIC utilities including exanic-config, exanic-capture, exanic-clock-sync and exanic-fwupdate
+- **scripts** - exasock wrapper script
+- **perf_test** - tools for performing performance tests with ExaNICs as well as with devices from other vendors
 - **examples** 
-	- **sock** - sock related examples (multicast receive, timestamping, extensions API)
+	- **exanic** - advanced usage with preloaded frames and a demonstration of a high resolution timing/measurement application
+	- **exasock** - exasock related examples (multicast receive, timestamping, extensions API)
 	- **filters** - filtering and traffic steering examples
+	- **devkit** - software examples that are paired with the Firmware Development Kit (FDK)
 - **debian** - Debian/Ubuntu packaging
-- **nic.spec** - Redhat/CentOS packaging
+- **exanic.spec** - Redhat/CentOS packaging
 
 Installation
 ------------
@@ -37,5 +41,5 @@ To install from source please run ``make`` and ``sudo make install`` from the to
 
 Support
 -------
-For other questions and comments, you can contact us directly.
+Complete documentation is available from our [website](https://www.cisco.com/c/en/us/td/docs/dcn/nexus3550/smartnic/sw/user-guide/cisco-nexus-smartnic-user-guide/index.html). For other questions and comments, you can contact Cisco TAC support team.
 

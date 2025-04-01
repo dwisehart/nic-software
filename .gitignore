@@ -1,3 +1,11 @@
-.*
 !.gitignore
+.*
 *~
+*.o
+*.so
+*.ko
+*.a
+util/**
+*.mod.c
+*.symvers
+modules.order

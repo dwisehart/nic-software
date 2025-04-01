@@ -107,7 +107,7 @@ sendto_bypass_tcp(struct exa_socket * restrict sock, int sockfd,
 {
     bool nonblock = (flags & MSG_DONTWAIT) || (sock->flags & O_NONBLOCK);
     bool warm = !!(flags & MSG_EXA_WARM);
-    ssize_t nwritten, ret;
+    ssize_t nwritten, ret = 0;
 
     assert(sock->bypass_state == EXA_BYPASS_ACTIVE);
     assert(sock->domain == AF_INET);
@@ -452,7 +452,7 @@ sendmsg_bypass_tcp(struct exa_socket * restrict sock, int sockfd,
 {
     bool nonblock = (flags & MSG_DONTWAIT) || (sock->flags & O_NONBLOCK);
     bool warm = !!(flags & MSG_EXA_WARM);
-    ssize_t nwritten, ret;
+    ssize_t nwritten, ret = 0;
     size_t count;
 
     assert(sock->bypass_state == EXA_BYPASS_ACTIVE);
@@ -742,7 +742,7 @@ write_bypass_tcp(struct exa_socket * restrict sock, int fd, const void *buf,
                  size_t count)
 {
     bool nonblock = (sock->flags & O_NONBLOCK);
-    ssize_t nwritten, ret;
+    ssize_t nwritten, ret = 0;
 
     assert(exa_read_locked(&sock->lock));
     assert(sock->connected);
@@ -874,7 +874,7 @@ writev_bypass_tcp(struct exa_socket * restrict sock, int fd,
                   const struct iovec *iov, size_t iovcnt)
 {
     bool nonblock = (sock->flags & O_NONBLOCK);
-    ssize_t nwritten, ret;
+    ssize_t nwritten, ret = 0;
     size_t count;
 
     assert(exa_read_locked(&sock->lock));
